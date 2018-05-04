@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_USER: acms
+      POSTGRES_DB: acms
+  api:
+    build: ./server/
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./server:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  ui:
+    build: ./dashboard/
+    command: yarn start
+    volumes:
+      - ./dashboard:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
