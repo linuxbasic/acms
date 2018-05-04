@@ -1,4 +1,11 @@
 import graphene
-from api.schemas.query import Query
+from api.queries.all_containers import AllContainersQuery
+from api.mutations.register_container import RegisterContainerMutation
 
-schema = graphene.Schema(query=Query)
+class Query(AllContainersQuery, graphene.ObjectType):
+    pass
+
+class Mutation(graphene.ObjectType):
+    register_container = RegisterContainerMutation.Field()
+
+schema = graphene.Schema(query=Query, mutation=Mutation)
