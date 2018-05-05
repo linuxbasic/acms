@@ -8,29 +8,36 @@ const Step = Steps.Step;
 
 class App extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             current: 0,
-        };
+            containerId: props.match.params.containerId || '',
+            pin: ''
+        }
     }
     next() {
-        const current = this.state.current + 1;
-        this.setState({ current });
+        if ((this.state.containerId.length === 6 && this.state.current === 0) || (this.state.pin.length === 4 && this.state.current === 1)) {
+            const current = this.state.current + 1;
+            this.setState({ current });
+        }
     }
     prev() {
         const current = this.state.current - 1;
         this.setState({ current });
     }
-    updateContainerId(id) {
-        if(id.length === 6){
-            console.log(this)
-            this.next()
-        }
+    updateContainerId(containerId) {
+        this.setState({ containerId })
+        this.next()
     }
 
-    updatePin(pin){
-        if(pin.length === 4){
-            this.next()
+    updatePin(pin) {
+        this.setState({ pin })
+        this.next()
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        if ((nextState.containerId.length === 6 && nextState.current === 0) || (nextState.pin.length === 4 && nextState.current === 1)) {
+            nextState.current = this.state.current + 1;
         }
     }
 
@@ -38,12 +45,15 @@ class App extends React.Component {
         const { current } = this.state;
         const steps = [{
             title: 'Container Code',
-            content: (<ReactCodeInput key='container' type='text' fields={6} onChange={code => this.updateContainerId(code)} />),
+            content: (<div>
+                <ReactCodeInput key='container' value={this.state.containerId} type='text' fields={6} onChange={code => this.updateContainerId(code)} />
+                <Button type="primary" onClick={() => this.next()} disabled={this.state.containerId.length < 6} >Next</Button>
+            </div>),
         }, {
             title: 'PIN code',
-            content: ((<ReactCodeInput key='pin' type='password' fields={4} onChange={pin => this.updatePin(pin)} />)),
+            content: ((<ReactCodeInput key='pin' type='password' value={this.state.pin} fields={4} onChange={pin => this.updatePin(pin)} />)),
         }, {
-            title: 'Last',
+            title: 'Confirm Pickup',
             content: (<Button type="primary" onClick={() => message.success('Processing complete!')}>Order Pickup</Button>),
         }];
         return (
