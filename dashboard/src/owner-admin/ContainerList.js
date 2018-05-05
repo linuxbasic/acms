@@ -27,6 +27,7 @@ class ContainerList extends Component {
         return (
             <div>
                 <List
+                    style={{ width: '30vw' }}
                     itemLayout="horizontal"
                     dataSource={this.props.containers}
                     renderItem={item => (
@@ -56,12 +57,12 @@ class ContainerList extends Component {
                                 e.preventDefault()
                                 const containerId = container.input.value
                                 const trackerId = tracker.input.value
-                                addTodo({ 
+                                addTodo({
                                     variables: { containerId, trackerId },
                                     refetchQueries: [{
                                         query: allContainers
-                                      }]
-                                 })
+                                    }]
+                                })
                                 cancelNewContainer()
                             }}
                             onCancel={cancelNewContainer}>
