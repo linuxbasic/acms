@@ -28,7 +28,7 @@ class App extends Component {
                         </Query>
                     </Sider>
                     <Content>
-                        <Query query={allContainers}>
+                        <Query query={allContainers} pollInterval={30*1000}>
                             {({ loading, error, data }) => {
                                 if (loading) return <p>Loading...</p>
                                 if (error) return <p>Error :(</p>
@@ -36,9 +36,6 @@ class App extends Component {
                                 return (<Map containers={data.allContainers} />)
                             }}
                         </Query>
-                    </Content>
-                    <Content>
-                        <h1>Hallo</h1>
                     </Content>
                 </Layout>
             </Layout>
