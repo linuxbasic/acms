@@ -33,9 +33,9 @@ class ContainerList extends Component {
                     renderItem={item => (
                         <List.Item>
                             <List.Item.Meta
-                                avatar={<Avatar style={{ backgroundColor: 'red' }} size='large' />}
+                                avatar={<Avatar style={{ backgroundColor: item.pickup ? 'green' : 'red' }} size='large' />}
                                 title={item.containerId}
-                                description='Containerstrasse 5, 1234 Hinterbipp'
+                                //description='Containerstrasse 5, 1234 Hinterbipp'
                             />
                         </List.Item>
                     )}

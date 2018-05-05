@@ -10,10 +10,14 @@ class ContainerType(DjangoObjectType):
 
     lon = graphene.Float()
     lat = graphene.Float()
+    pickup = graphene.Boolean()
 
     def resolve_lon(self, info, **kwargs):
         return get_data(self.tracker_id)[-1]['lon']
 
     def resolve_lat(self, info, **kwargs):
         return get_data(self.tracker_id)[-1]['lat']
+
+    def resolve_pickup(self, info, **kwargs):
+        return get_data(self.tracker_id)[-1]['request'] == 1
         
