@@ -4,12 +4,12 @@ from api.objects import ContainerType
 
 class RegisterContainerMutation(graphene.Mutation):
     class Arguments:
-        id = graphene.String()
+        container_id = graphene.String()
         tracker_id = graphene.String()
     ok = graphene.Boolean()
     container = graphene.Field(lambda: ContainerType)
 
-    def mutate(self, info, id, tracker_id):
-        container = Container(id=id, tracker=tracker_id)
+    def mutate(self, info, container_id, tracker_id):
+        container = Container(container_id=container_id, tracker_id=tracker_id)
         container.save()
-        return container
+        return RegisterContainerMutation(ok=True, container=container)
