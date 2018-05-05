@@ -12,8 +12,8 @@ class ContainerType(DjangoObjectType):
     lat = graphene.Float()
 
     def resolve_lon(self, info, **kwargs):
-        return get_data(self.tracker_id)[1]['lon']
+        return get_data(self.tracker_id)[-1]['lon']
 
     def resolve_lat(self, info, **kwargs):
-        return get_data(self.tracker_id)[1]['lat']
+        return get_data(self.tracker_id)[-1]['lat']
         
