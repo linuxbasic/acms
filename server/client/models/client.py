@@ -8,4 +8,5 @@ def validate_pin(value):
 # Create your models here.
 class Client(models.Model):
     client_id = models.CharField(max_length=100, primary_key=True, editable=False)
+    name = models.TextField(null=False)
     client_pin = models.IntegerField(validators=[validate_pin])

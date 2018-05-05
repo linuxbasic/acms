@@ -1,1 +1,2 @@
 from .register_container import RegisterContainerMutation
+from .register_client import RegisterClientMutation
