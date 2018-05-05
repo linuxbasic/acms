@@ -13,7 +13,7 @@ class App extends Component {
         <ApolloProvider client={apollo}>
           <Switch>
             <Route path='/admin' component={OwnerAdminApp} />
-            <Route path='/pickup/:containerId' component={ClientPickupApp} />
+            <Route path='/pickup/:containerId' component={ClientPickupApp} />x
             <Route path='/pickup' component={ClientPickupApp} />
           </Switch>
         </ApolloProvider>

@@ -1,7 +1,7 @@
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react'
 import React, { Component } from 'react'
 
-export class MapContainer extends Component {
+export class ContainerMap extends Component {
 
     render() {
         const bounds = new this.props.google.maps.LatLngBounds()
@@ -23,4 +23,4 @@ export class MapContainer extends Component {
 
 export default GoogleApiWrapper({
     apiKey: ('AIzaSyDWcxq-wliehCZkjvx-OmkIBc3zcMx4_3Q')
-})(MapContainer)
+})(ContainerMap)

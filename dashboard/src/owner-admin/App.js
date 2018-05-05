@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
-import { Query } from 'react-apollo'
 import { Layout } from 'antd'
 import Navigation from './Navigation'
-import ContainerList from './ContainerList'
-import allContainers from './queries/allContainers'
-
-import Map from '../map'
-
-const { Sider, Content } = Layout;
+import Containers from './Containers'
+import Clients from './Clients'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 
 class App extends Component {
@@ -15,28 +11,14 @@ class App extends Component {
         return (
             <Layout className="layout">
                 <Navigation />
-                <Layout>
-                    <Sider width='30vw' style={{ background: '#fff' }}>
-                        <Query query={allContainers}>
-                            {({ loading, error, data }) => {
-                                if (loading) return <p>Loading...</p>
-                                if (error) return <p>Error :(</p>
-
-                                return <ContainerList containers={data.allContainers} />
-                            }}
-                        </Query>
-                    </Sider>
-                    <Content>
-                        <Query query={allContainers} pollInterval={30*1000}>
-                            {({ loading, error, data }) => {
-                                if (loading) return <p>Loading...</p>
-                                if (error) return <p>Error :(</p>
-
-                                return (<Map containers={data.allContainers} />)
-                            }}
-                        </Query>
-                    </Content>
-                </Layout>
+                <Switch>
+                    <Route path='/admin/containers' component={Containers} />
+                    <Route path='/admin/clients' component={Clients} />
+                    <Route path='/admin/orders' component={Containers} />
+                    <Route path='/admin'>
+                        <Redirect to='/admin/containers' />
+                    </Route>
+                </Switch>
             </Layout>
         );
     }
