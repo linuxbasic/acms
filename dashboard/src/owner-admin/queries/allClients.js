@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 export default gql`{
     allClients {
-      clientId
+      clientId,
+      name,
+      clientPin
     }
   }`
