@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
-import 'antd/dist/antd.css';
-import { List, Avatar, Modal, Button, Affix, Input } from 'antd';
+import React, { Component } from 'react'
+import { Mutation } from 'react-apollo'
+import registerContainer from './mutations/registerContainer'
+import allContainers from './queries/allContainers'
+import 'antd/dist/antd.css'
+import { List, Avatar, Modal, Button, Affix, Input } from 'antd'
 
 
 class ContainerList extends Component {
     state = {
         showCreateModal: false
     }
-    showCreateModal = () => {
-        this.setState({
-            showCreateModal: true
-        })
-    }
-    createNewContainer = (e) => {
-        console.log(this.state.newContainerId)
-        this.setState({
-            showCreateModal: false,
-        });
-    }
-    cancelNewContainer = (e) => {
-        this.setState({
-            showCreateModal: false,
-        });
-    }
     render() {
+        let container, tracker
+        const cancelNewContainer = () => {
+            this.setState({
+                showCreateModal: false,
+            })
+            container.input.value = ''
+            tracker.input.value = ''
+        }
+        const showCreateModal = () => {
+            this.setState({
+                showCreateModal: true
+            })
+        }
         return (
             <div>
                 <List
@@ -45,16 +45,31 @@ class ContainerList extends Component {
                         shape='circle'
                         icon='plus'
                         size='large'
-                        onClick={this.showCreateModal} />
+                        onClick={showCreateModal} />
                 </Affix>
-                <Modal
-                    title='New Container'
-                    visible={this.state.showCreateModal}
-                    onOk={this.createNewContainer}
-                    onCancel={this.cancelNewContainer}
-                >
-                    <Input addonBefore='Container ID'/>
-                </Modal>
+                <Mutation mutation={registerContainer}>
+                    {
+                        ((addTodo, { data }) => (<Modal
+                            title='New Container'
+                            visible={this.state.showCreateModal}
+                            onOk={(e) => {
+                                e.preventDefault()
+                                const containerId = container.input.value
+                                const trackerId = tracker.input.value
+                                addTodo({ 
+                                    variables: { containerId, trackerId },
+                                    refetchQueries: [{
+                                        query: allContainers
+                                      }]
+                                 })
+                                cancelNewContainer()
+                            }}
+                            onCancel={cancelNewContainer}>
+                            <Input ref={(input) => container = input} addonBefore='Container ID' />
+                            <Input ref={(input) => tracker = input} addonBefore='Tracker ID' />
+                        </Modal>))
+                    }
+                </Mutation>
             </div>
         );
     }
