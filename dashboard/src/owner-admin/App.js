@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Query } from 'react-apollo'
-import 'antd/dist/antd.css'
 import { Layout } from 'antd'
 import Navigation from './Navigation'
 import ContainerList from './ContainerList'
