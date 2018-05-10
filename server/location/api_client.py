@@ -10,4 +10,4 @@ def get_devices():
 
 
 def get_data(tracker_id):
-    return requests.get( f'{BASE_URL}/api/v2/query/{tracker_id}?last=1d', headers=HEADERS).json()
+    return requests.get( f'{BASE_URL}/api/v2/query/{tracker_id}?last=30d', headers=HEADERS).json()
