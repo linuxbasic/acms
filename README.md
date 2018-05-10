@@ -17,7 +17,7 @@ Dieses Projekt ist im Rahmen des [Umma Hüsla Hackathon 2018](https://uh18.diin.
 
 - [Admin UI](http://localhost:3000/#/admin/containers)
 - [Pickup UI](http://localhost:3000/#/pickup)
-- [API UI](localhost:8000/graphql)
+- [API UI](http://localhost:8000/graphql)
 - [Tracker Data API UI](https://containertracker.data.thethingsnetwork.org)
 
 ## Inception Deck
