@@ -44,7 +44,7 @@ class App extends React.Component {
     render() {
         const { current } = this.state;
         const steps = [{
-            title: 'Container Code',
+            title: 'Container ID',
             content: (<div>
                 <ReactCodeInput key='container' value={this.state.containerId} type='text' fields={6} onChange={code => this.updateContainerId(code)} />
                 <Button type="primary" onClick={() => this.next()} disabled={this.state.containerId.length < 6} >Next</Button>
@@ -54,7 +54,7 @@ class App extends React.Component {
             content: ((<ReactCodeInput key='pin' type='password' value={this.state.pin} fields={4} onChange={pin => this.updatePin(pin)} />)),
         }, {
             title: 'Confirm Pickup',
-            content: (<Button type="primary" onClick={() => message.success('Processing complete!')}>Order Pickup</Button>),
+            content: (<Button type="primary" onClick={() => message.success('Processing complete!')}>Request Pickup</Button>),
         }];
         return (
             <Card title="Container Pickup">
